@@ -10,6 +10,23 @@ function App() {
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
 
+
+ 
+
+
+  const onTextChange = e => {
+    setState({...state, [e.target.name]: e.target.value})
+  }
+
+
+  const onMessageSubmit = (e) => {
+    e.preventDefault()
+    const { name, message } = state
+    socket.emit('message', {name, message})
+    setState({ message: "", name })
+  }
+
+
   const renderChat = () => {
     return chat.map(({ name, message }, index ) => {
         <div key={index}>
@@ -23,7 +40,7 @@ function App() {
   return (
     <div className="card">
       <form onSubmit={onMessageSubmit}>
-        <h1>Messanger</h1>
+        <h1>Messenger</h1>
         <div className="name-field">
           <TextField
             name="name"
