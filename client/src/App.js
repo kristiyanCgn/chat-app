@@ -18,7 +18,7 @@ function App() {
   })
 
 
-  const onTextChange = e => {
+  const onTextChange = (e) => {
     setState({...state, [e.target.name]: e.target.value})
   }
 
@@ -32,16 +32,14 @@ function App() {
 
 
   const renderChat = () => {
-    return chat.map(({ name, message }, index ) => {
-        console.log(name);
-        console.log(message);
+    return chat.map(({ name, message }, index) => (
         <div key={index}>
             <h3>
                 {name}: <span>{message}</span>
             </h3>
         </div>
-    })
-  }
+    ))
+}
 
   return (
     <div className="card">
@@ -60,7 +58,7 @@ function App() {
             name="message"
             onChange={(e) => onTextChange(e)}
             value={state.message}
-            id="otlined-multiline-statixc"
+            id="outlined-multiline-static"
             variant="outlined"
             label="Message"
           />
