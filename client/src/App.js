@@ -11,7 +11,11 @@ function App() {
   const [chat, setChat] = useState([]);
 
 
- 
+  useEffect(() => {
+    socket.on('message', ({ name, message }) => {
+        setChat([...chat, { name, message }])
+    })
+  })
 
 
   const onTextChange = e => {
@@ -22,13 +26,15 @@ function App() {
   const onMessageSubmit = (e) => {
     e.preventDefault()
     const { name, message } = state
-    socket.emit('message', {name, message})
+    socket.emit('message', { name, message })
     setState({ message: "", name })
   }
 
 
   const renderChat = () => {
     return chat.map(({ name, message }, index ) => {
+        console.log(name);
+        console.log(message);
         <div key={index}>
             <h3>
                 {name}: <span>{message}</span>
